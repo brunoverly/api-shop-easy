@@ -1,3 +1,15 @@
 spring:
   application:
     name: ShopEasy
+  jpa:
+    hibernate:
+      ddl-auto: validate
+  datasource:
+    url: jdbc:postgresql://localhost:5432/shopeasy
+    username: postgres
+    password: yH7UFQ47
+
+
+server:
+  error:
+    include-stacktrace: never
