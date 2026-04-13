@@ -8,9 +8,9 @@ import java.util.List;
 
 public class CategoriaRequestDto {
     @NotBlank
-    @Size(max = 100)
+    @Size(max = 250)
     private String nome;
     @NotBlank
-    @Size(max = 300)
+    @Size(max = 500)
     private String descricao;
 }

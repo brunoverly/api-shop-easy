@@ -27,7 +27,7 @@ public class Pedido {
     private BigDecimal valorTotal;
     private String nomeCliente;
     private String emailCliente;
-    @OneToMany(cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
     private List<ItemPedido> itens;
 
     @PrePersist
