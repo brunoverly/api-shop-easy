@@ -12,9 +12,9 @@ import java.math.BigDecimal;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@Table(name = "itens")
+@Table(name = "itens_pedido")
 @Entity
-public class Item {
+public class ItemPedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -25,6 +25,4 @@ public class Item {
     private Pedido pedido;
     @ManyToOne(fetch = FetchType.LAZY)
     private Produto produto;
-
-
 }

@@ -6,6 +6,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -18,4 +20,6 @@ public class Categoria {
     private Long id;
     private String nome;
     private String descricao;
+    @OneToMany(fetch = FetchType.LAZY)
+    private List<Produto> produto;
 }
