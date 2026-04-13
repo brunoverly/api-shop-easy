@@ -8,6 +8,7 @@ import lombok.Setter;
 import org.hibernate.cache.spi.support.AbstractReadWriteAccess;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Getter
 @Setter
