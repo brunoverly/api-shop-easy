@@ -7,6 +7,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.time.LocalDate;
 
 @Getter
@@ -15,23 +16,20 @@ import java.time.LocalDate;
 @AllArgsConstructor
 @Table(name = "usuarios")
 @Entity
-public class Usuario {
+public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String email;
-    private String password;
-    private String telefone;
-    private LocalDate dataCadastro;
+    private String nome;
+    private String descricao;
+    private BigDecimal preco;
+    private int qtdEstoque;
     private boolean ativo;
-    @Enumerated(EnumType.STRING)
-    private Perfil peril;
-    @OneToOne(fetch = FetchType.LAZY)
-    private Endereco endereco;
+    @ManyToOne
+    private Categoria categoria;
 
     @PrePersist
     public void onCreat() {
-        this.dataCadastro = LocalDate.now();
         this.ativo = true;
     }
 }
