@@ -63,4 +63,5 @@ public class CategoriaController {
         return categoriaService.findAll(pageable);
     }
 
+
 }

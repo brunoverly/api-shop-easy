@@ -7,8 +7,8 @@ import com.ShopEasy.entity.Produto;
 import com.ShopEasy.mapper.EntityToDtoMapper;
 import com.ShopEasy.repository.CategoriaRepositoy;
 import com.ShopEasy.repository.ProdutoRepository;
-import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -65,10 +65,47 @@ public class ProdutoService {
     }
 
     public ResponseEntity<ProdutoResponseDto> findById(Long id) {
+        Produto produto = checkarSeProdutoExisteAtivo(id);
+        return ResponseEntity.ok(mapper.entityToDto(produto));
+    }
+
+    public ResponseEntity delete(Long id) {
+
+        Produto produto = checkarSeProdutoExisteAtivo(id);
+
+        produto.setAtivo(false);
+        produtoRepository.save(produto);
+
+        return ResponseEntity.noContent().build();
+    }
+
+    public ResponseEntity<ProdutoResponseDto> update(Long id, @Valid ProdutoRequestDto produtoRequestDto) {
+        Produto produto = checkarSeProdutoExisteAtivo(id);
+        Categoria categoria = categoriaRepositoy.findById(produtoRequestDto.idCategoria())
+                        .orElseThrow(()-> new EntityNotFoundException("Não foi localizada uma categoria com o id informado no banco"));
+
+        produto.setNome(produtoRequestDto.nome());
+        produto.setDescricao(produtoRequestDto.descricao());
+        produto.setPreco(produtoRequestDto.preco());
+        produto.setQtdEstoque(produtoRequestDto.qtdEstoque());
+        produto.setCategoria(categoria);
+        produtoRepository.save(produto);
+
+
+        return ResponseEntity.ok(mapper.entityToDto(produto));
+
+
+    }
+
+
+
+
+
+    private Produto checkarSeProdutoExisteAtivo(Long id) {
         Produto produto = produtoRepository.findByIdByAtivo(id);
         if(produto == null) {
             throw new EntityNotFoundException("Não foi localizado nenhum produto ativo com o ID informado");
         }
-        return ResponseEntity.ok(mapper.entityToDto(produto));
+        return produto;
     }
 }

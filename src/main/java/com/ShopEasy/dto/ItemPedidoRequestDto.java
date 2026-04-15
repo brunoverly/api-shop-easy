@@ -1,19 +1,16 @@
 package com.ShopEasy.dto;
 
-import com.ShopEasy.entity.Pedido;
-import com.ShopEasy.entity.Produto;
-import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 
 import java.math.BigDecimal;
 
 public record ItemPedidoRequestDto(
-        @Positive
+        @Positive(message = "Quantidade deve ser maior que 0")
         int quantidade,
-        @Positive
+        @Positive(message = "Preço deve ser maior que 0")
         BigDecimal precoUnitario,
-        @Positive
+        @Positive(message = "Preço total deve ser maior que 0")
         BigDecimal subtotal,
         @NotNull
         PedidoRequestDto pedido,

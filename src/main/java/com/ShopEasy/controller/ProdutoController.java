@@ -57,5 +57,16 @@ public class ProdutoController {
         return produtoService.findById(id);
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteById(@PathVariable Long id) {
+        return produtoService.delete(id);
+    }
+
+
+    @PutMapping("/{id}")
+    public ResponseEntity<ProdutoResponseDto> updateProduto(@PathVariable Long id, @RequestBody @Valid ProdutoRequestDto produtoRequestDto) {
+        return produtoService.update(id, produtoRequestDto);
+    }
+
 
 }

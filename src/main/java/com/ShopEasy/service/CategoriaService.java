@@ -2,13 +2,9 @@ package com.ShopEasy.service;
 
 import com.ShopEasy.dto.CategoriaRequestDto;
 import com.ShopEasy.dto.CategoriaResponseDto;
-import com.ShopEasy.dto.ProdutoResponseDto;
-import com.ShopEasy.dto.ProdutoResumoDto;
 import com.ShopEasy.entity.Categoria;
-import com.ShopEasy.entity.Produto;
 import com.ShopEasy.mapper.EntityToDtoMapper;
 import com.ShopEasy.repository.CategoriaRepositoy;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.support.ResourcePatternResolver;
@@ -19,9 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -60,5 +53,6 @@ public class CategoriaService {
         Page<CategoriaResponseDto> categoriasDto = categorias.map(mapper::entityToDto);
         return categoriasDto;
     }
+
 
 }
