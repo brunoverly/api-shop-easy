@@ -1,5 +1,5 @@
 CREATE TABLE itens_pedido(
-                             id BIGINT PRIMARY KEY,
+                             id BIGSERIAL PRIMARY KEY,
                              quantidade int,
                              preco_unitario NUMERIC(10,2),
                              subtotal NUMERIC(10,2),

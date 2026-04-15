@@ -1,5 +1,5 @@
 CREATE TABLE pedidos(
-                         id BIGINT PRIMARY KEY,
+                         id BIGSERIAL PRIMARY KEY,
                          numero_pedido VARCHAR(250),
                          data_pedido TIMESTAMP,
                          status VARCHAR(50),

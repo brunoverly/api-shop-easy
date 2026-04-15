@@ -1,5 +1,5 @@
 CREATE TABLE produtos(
-                         id BIGINT PRIMARY KEY,
+                         id BIGSERIAL PRIMARY KEY,
                          nome VARCHAR(250),
                          descricao VARCHAR(500),
                          preco NUMERIC(10,2),
