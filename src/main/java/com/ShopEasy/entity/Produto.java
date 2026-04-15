@@ -2,10 +2,8 @@ package com.ShopEasy.entity;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
 import java.math.BigDecimal;
 
 @Getter
@@ -14,6 +12,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Table(name = "produtos")
 @Entity
+@Builder
 public class Produto {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

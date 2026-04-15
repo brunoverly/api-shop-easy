@@ -61,25 +61,4 @@ public class CategoriaService {
         return categoriasDto;
     }
 
-    public ResponseEntity<CategoriaResponseDto> findById (Long id){
-        Categoria categoria = categoriaRepositoy.findById(id).orElseThrow(()-> new EntityNotFoundException("Categoria com ID não localizada no banco"));
-        List<Produto> produtos = categoria.getProdutos();
-        List<ProdutoResumoDto> produtoResumoDtos = produtos.stream()
-                .map(produto -> new ProdutoResumoDto(
-                        produto.getId(),
-                        produto.getNome(),
-                        produto.getDescricao(),
-                        produto.getPreco(),
-                        produto.getQtdEstoque()))
-                .collect(Collectors.toList());
-
-        CategoriaResponseDto categoriaResponseDto = new CategoriaResponseDto(
-                categoria.getId(),
-                categoria.getNome(),
-                categoria.getDescricao(),
-                produtoResumoDtos);
-
-        return  ResponseEntity.ok(categoriaResponseDto);
-    }
-
 }

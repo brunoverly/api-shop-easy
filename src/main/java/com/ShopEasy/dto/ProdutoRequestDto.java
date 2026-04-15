@@ -18,5 +18,5 @@ public record ProdutoRequestDto(
          @Positive
          int qtdEstoque,
          @NotNull
-         CategoriaRequestDto categoria){
+         Long idCategoria){
 }
