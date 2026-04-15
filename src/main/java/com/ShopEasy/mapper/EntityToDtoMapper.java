@@ -5,7 +5,6 @@ import com.ShopEasy.entity.Categoria;
 import com.ShopEasy.entity.ItemPedido;
 import com.ShopEasy.entity.Pedido;
 import com.ShopEasy.entity.Produto;
-import jdk.jfr.Category;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

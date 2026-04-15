@@ -1,5 +1,6 @@
 package com.ShopEasy.entity;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +23,7 @@ public class Produto {
     private BigDecimal preco;
     private int qtdEstoque;
     private boolean ativo;
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     private Categoria categoria;
 
     @PrePersist

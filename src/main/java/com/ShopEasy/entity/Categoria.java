@@ -1,10 +1,8 @@
 package com.ShopEasy.entity;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
@@ -14,6 +12,7 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "categorias")
 @Entity
+@Builder
 public class Categoria {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
