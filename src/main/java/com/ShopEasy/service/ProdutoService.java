@@ -1,5 +1,6 @@
 package com.ShopEasy.service;
 
+import com.ShopEasy.config.ProdutoSpecification;
 import com.ShopEasy.dto.ProdutoRequestDto;
 import com.ShopEasy.dto.ProdutoResponseDto;
 import com.ShopEasy.entity.Categoria;
@@ -13,11 +14,14 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
+
+import static org.springframework.data.jpa.domain.Specification.where;
 
 @Service
 @Slf4j
@@ -55,35 +59,45 @@ public class ProdutoService {
         return ResponseEntity.created(uri).body(mapper.entityToDto(produto));
     }
 
-    public Page<ProdutoResponseDto> findAll(Pageable pageable) {
+    public Page<ProdutoResponseDto> findAll(Pageable pageable, String nome, Long idCategoria) {
         log.info("entrou no método de listar todos os produtos ativos");
-        Page<Produto> produtos = produtoRepository.findAllByAtivo(pageable);
-        Page<ProdutoResponseDto> produtoResponseDtos = produtos.map(mapper::entityToDto);
 
+        Specification<Produto> spec = ProdutoSpecification.temNome(nome)
+                .and(ProdutoSpecification.temCategoria(idCategoria))
+                .and(ProdutoSpecification.ativo());
+
+        Page<Produto> produtos =  produtoRepository.findAll(spec, pageable);
+        Page<ProdutoResponseDto> produtosResponseDto = produtos.map(mapper::entityToDto);
         log.info("encerrou o método de listar todos os produtos com sucesso");
-        return produtoResponseDtos;
+        return produtosResponseDto;
     }
 
     public ResponseEntity<ProdutoResponseDto> findById(Long id) {
+        log.info("entrou no método de buscar um produto por id");
         Produto produto = checkarSeProdutoExisteAtivo(id);
+        log.info("método de buscar por id finalizado com sucesso");
         return ResponseEntity.ok(mapper.entityToDto(produto));
     }
 
     public ResponseEntity delete(Long id) {
-
+        log.info("entrou no método de desativar o produto por id");
         Produto produto = checkarSeProdutoExisteAtivo(id);
 
         produto.setAtivo(false);
         produtoRepository.save(produto);
 
+        log.info("método finalizado com sucesso");
         return ResponseEntity.noContent().build();
     }
 
     public ResponseEntity<ProdutoResponseDto> update(Long id, @Valid ProdutoRequestDto produtoRequestDto) {
+        log.info("entrou no método de atualizar o produto");
+
         Produto produto = checkarSeProdutoExisteAtivo(id);
         Categoria categoria = categoriaRepositoy.findById(produtoRequestDto.idCategoria())
                         .orElseThrow(()-> new EntityNotFoundException("Não foi localizada uma categoria com o id informado no banco"));
 
+        log.info("recriando o produto e atualizando os novos dados");
         produto.setNome(produtoRequestDto.nome());
         produto.setDescricao(produtoRequestDto.descricao());
         produto.setPreco(produtoRequestDto.preco());
@@ -91,11 +105,13 @@ public class ProdutoService {
         produto.setCategoria(categoria);
         produtoRepository.save(produto);
 
-
+        log.info("método de atualizar produto encerrado com sucesso");
         return ResponseEntity.ok(mapper.entityToDto(produto));
 
-
     }
+
+
+
 
 
 

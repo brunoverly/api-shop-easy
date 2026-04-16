@@ -1,14 +1,16 @@
 package com.ShopEasy.repository;
 
 import com.ShopEasy.entity.Produto;
+import org.hibernate.boot.model.source.spi.TableSpecificationSource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface ProdutoRepository extends JpaRepository<Produto, Long> {
+public interface ProdutoRepository extends JpaRepository<Produto, Long>, JpaSpecificationExecutor<Produto> {
     @Query(
             "SELECT p FROM Produto p WHERE p.ativo = true"
     )

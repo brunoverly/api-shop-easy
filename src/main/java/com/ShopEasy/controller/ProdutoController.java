@@ -58,8 +58,11 @@ public class ProdutoController {
                     description = "Erro ao conectar ao banco")
     })
     @GetMapping
-    public Page<ProdutoResponseDto> findAll(@PageableDefault(size = 10, sort = "nome") Pageable pageable) {
-        return produtoService.findAll(pageable);
+    public Page<ProdutoResponseDto> findAll(@PageableDefault(size = 10, sort = "nome") Pageable pageable,
+                                            @RequestParam(required = false) String nome,
+                                            @RequestParam(required = false) Long idCategoria) {
+
+        return produtoService.findAll(pageable, nome, idCategoria);
     }
 
     @Operation(summary = "Buscar produto por ID", description = "Retorna o produto específico do ID informado")
