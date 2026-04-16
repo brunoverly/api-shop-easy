@@ -1,5 +1,6 @@
 package com.ShopEasy.config;
 
+import com.ShopEasy.exception.EstoqueInsuficienteException;
 import com.ShopEasy.exception.ExceptionModel;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.http.HttpStatus;
@@ -16,7 +17,7 @@ import java.util.Map;
 public class GlobalExceptinHandler {
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<ExceptionModel> handleException(Exception ex) {
+    public ResponseEntity<ExceptionModel> handleException(EntityNotFoundException ex) {
         ExceptionModel exception = new ExceptionModel(
                 LocalDateTime.now(),
                 "Not found",
@@ -34,6 +35,17 @@ public class GlobalExceptinHandler {
                 exception.put(error.getField(), error.getDefaultMessage())
         );
 
+        return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception);
+    }
+
+    @ExceptionHandler(EstoqueInsuficienteException.class)
+    public ResponseEntity<Object> handleExceptionEstoqueInsuficiente(EstoqueInsuficienteException ex) {
+        ExceptionModel exception = new ExceptionModel(
+                LocalDateTime.now(),
+                "Bad request",
+                400,
+                ex.getMessage()
+        );
         return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(exception);
     }
 }

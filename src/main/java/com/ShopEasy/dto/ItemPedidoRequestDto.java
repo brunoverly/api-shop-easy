@@ -2,7 +2,6 @@ package com.ShopEasy.dto;
 
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
-
 import java.math.BigDecimal;
 
 public record ItemPedidoRequestDto(
@@ -10,10 +9,6 @@ public record ItemPedidoRequestDto(
         int quantidade,
         @Positive(message = "Preço deve ser maior que 0")
         BigDecimal precoUnitario,
-        @Positive(message = "Preço total deve ser maior que 0")
-        BigDecimal subtotal,
-        @NotNull
-        PedidoRequestDto pedido,
-        @NotNull
-        ProdutoRequestDto produto) {
+        @NotNull(message = "Id do produto não pode ser nulo")
+        Long idProduto) {
 }

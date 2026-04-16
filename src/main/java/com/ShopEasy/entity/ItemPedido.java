@@ -1,10 +1,9 @@
 package com.ShopEasy.entity;
 
+import com.ShopEasy.dto.PedidoRequestDto;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import jakarta.validation.Valid;
+import lombok.*;
 
 import java.math.BigDecimal;
 
@@ -14,6 +13,7 @@ import java.math.BigDecimal;
 @AllArgsConstructor
 @Table(name = "itens_pedido")
 @Entity
+@Builder
 public class ItemPedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,4 +27,6 @@ public class ItemPedido {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "produto_id")
     private Produto produto;
+
+
 }

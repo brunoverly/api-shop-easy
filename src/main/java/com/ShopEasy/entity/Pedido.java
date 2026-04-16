@@ -1,13 +1,12 @@
 package com.ShopEasy.entity;
 
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.UUID;
 
 @Getter
 @Setter
@@ -15,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Table(name = "pedidos")
 @Entity
+@Builder
 public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -27,11 +27,12 @@ public class Pedido {
     private BigDecimal valorTotal;
     private String nomeCliente;
     private String emailCliente;
-    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pedido", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ItemPedido> itens;
 
     @PrePersist
     public void prePersist() {
         this.dataPedido = LocalDateTime.now();
+        this.numeroPedido = UUID.randomUUID().toString();
     }
 }

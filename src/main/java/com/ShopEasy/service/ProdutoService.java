@@ -21,8 +21,6 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 
-import static org.springframework.data.jpa.domain.Specification.where;
-
 @Service
 @Slf4j
 public class ProdutoService {
@@ -68,6 +66,7 @@ public class ProdutoService {
 
         Page<Produto> produtos =  produtoRepository.findAll(spec, pageable);
         Page<ProdutoResponseDto> produtosResponseDto = produtos.map(mapper::entityToDto);
+
         log.info("encerrou o método de listar todos os produtos com sucesso");
         return produtosResponseDto;
     }

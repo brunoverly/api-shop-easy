@@ -1,5 +1,6 @@
 package com.ShopEasy.dto;
 
+import com.ShopEasy.entity.ItemPedido;
 import com.ShopEasy.entity.StatusPedido;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -9,10 +10,10 @@ public record PedidoResponseDto(
         Long id,
         String numeroPedido,
         LocalDateTime dataPedido,
-        StatusPedido statusPedido,
+        StatusPedido status,
         BigDecimal valorTotal,
         String nomeCliente,
         String emailCliente,
-        List<ItemPedidoResponseDto> itens
+        List<ItemPedidoResumoDto> itens
 ){
 }
