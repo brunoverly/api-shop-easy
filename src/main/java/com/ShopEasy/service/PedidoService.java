@@ -1,6 +1,9 @@
 package com.ShopEasy.service;
 
-import com.ShopEasy.dto.*;
+import com.ShopEasy.dto.ItemPedidoRequestDto;
+import com.ShopEasy.dto.ItemPedidoResumoDto;
+import com.ShopEasy.dto.PedidoRequestDto;
+import com.ShopEasy.dto.PedidoResponseDto;
 import com.ShopEasy.entity.ItemPedido;
 import com.ShopEasy.entity.Pedido;
 import com.ShopEasy.entity.Produto;
@@ -9,12 +12,14 @@ import com.ShopEasy.exception.EstoqueInsuficienteException;
 import com.ShopEasy.mapper.EntityToDtoMapper;
 import com.ShopEasy.repository.PedidoRepository;
 import com.ShopEasy.repository.ProdutoRepository;
-import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityNotFoundException;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
+
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
@@ -108,5 +113,19 @@ public class PedidoService {
 
 
         return pedidoResponseDto;
+    }
+
+    public Page<PedidoResponseDto> findAll(Pageable pageable) {
+        Page<Pedido> pedidos = pedidoRepository.findAll(pageable);
+        Page<PedidoResponseDto> pedidosResponseDto = pedidos.map(mapper::entityToDto);
+        return pedidosResponseDto;
+    }
+
+    public PedidoResponseDto findById(Long id) {
+        Pedido pedido = pedidoRepository.findById(id).orElseThrow(
+                () -> new EntityNotFoundException("Pedido com id {"+ id +"} não localizado no banco"));
+
+        return mapper.entityToDto(pedido);
+
     }
 }
