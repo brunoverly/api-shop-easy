@@ -6,9 +6,9 @@ spring:
       ddl-auto: validate
     show-sql: true
   datasource:
-    url: jdbc:postgresql://localhost:5432/shopeasy
-    username: postgres
-    password: yH7UFQ47
+    url: "endereco do banco"
+    username: "usuario do banco"
+    password: "senha do banco"
 server:
   error:
     include-stacktrace: never
