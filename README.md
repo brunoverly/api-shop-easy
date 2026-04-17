@@ -108,21 +108,16 @@ Faça um `POST /produtos` com:
 - `estoque = 10`
 - `preco = 100.00`
 
----
-
 ### 2. Criar Pedido de Sucesso
 Faça um `POST /pedidos` solicitando **3 unidades** desse produto.
 
 **Resultado esperado:** Pedido criado com sucesso.
 
----
 
 ### 3. Verificar Estoque
 Faça um `GET /produtos/{id}`
 
 **Resultado esperado:** O estoque atual deve ser **7**.
-
----
 
 ### 4. Tentar Fraude de Estoque
 Faça um `POST /pedidos` solicitando **8 unidades**.
@@ -130,14 +125,11 @@ Faça um `POST /pedidos` solicitando **8 unidades**.
 **Resultado esperado:**  
 Erro HTTP **422** (`EstoqueInsuficienteException`)
 
----
 
 ### 5. Cancelar Pedido
 Faça um `PATCH /pedidos/{id}/cancelar` do primeiro pedido gerado.
 
 **Resultado esperado:** Pedido alterado para **CANCELADO**.
-
----
 
 ### 6. Verificar Estorno de Estoque
 Faça um `GET /produtos/{id}`
