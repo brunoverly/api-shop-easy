@@ -1,5 +1,7 @@
 package com.ShopEasy.dto;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigDecimal;
 
 public record ItemPedidoResumoDto(

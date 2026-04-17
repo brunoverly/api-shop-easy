@@ -54,9 +54,7 @@ public class CategoriaController {
                     responseCode = "200",
                     content = @Content(
                             array = @ArraySchema(schema = @Schema(implementation = CategoriaResponseDto.class))
-                    )),
-            @ApiResponse(responseCode = "500",
-                    description = "Erro ao conectar ao banco")
+                    ))
     })
     @GetMapping
     public Page<CategoriaResponseDto> listarCategorias(@PageableDefault(size = 10, sort = "nome") Pageable pageable) {

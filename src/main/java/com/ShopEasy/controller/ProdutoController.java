@@ -76,9 +76,7 @@ public class ProdutoController {
                     description = "ID não localizado",
                     content = @Content(
                             schema = @Schema(implementation = ExceptionModel.class)
-                    )),
-            @ApiResponse(responseCode = "500",
-                    description = "Erro ao conectar ao banco")
+                    ))
     })
     @GetMapping("/{id}")
     public ResponseEntity<ProdutoResponseDto> findById(@PathVariable Long id) {
@@ -95,9 +93,7 @@ public class ProdutoController {
                     description = "ID não localizado",
                     content = @Content(
                             schema = @Schema(implementation = ExceptionModel.class)
-                    )),
-            @ApiResponse(responseCode = "500",
-                    description = "Erro ao conectar ao banco")
+                    ))
     })
     @DeleteMapping("/{id}")
     public ResponseEntity deleteById(@PathVariable Long id) {
@@ -118,9 +114,7 @@ public class ProdutoController {
                     description = "ID não localizado",
                     content = @Content(
                             schema = @Schema(implementation = ExceptionModel.class)
-                    )),
-            @ApiResponse(responseCode = "500",
-                    description = "Erro ao conectar ao banco")
+                    ))
     })
     @PutMapping("/{id}")
     public ResponseEntity<ProdutoResponseDto> updateProduto(@PathVariable Long id, @RequestBody @Valid ProdutoRequestDto produtoRequestDto) {

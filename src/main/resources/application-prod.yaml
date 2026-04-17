@@ -1,11 +1,10 @@
 spring:
-  profiles:
-    active: dev
   application:
     name: ShopEasy
   jpa:
     hibernate:
       ddl-auto: validate
+    show-sql: false
   datasource:
     url: jdbc:postgresql://localhost:5432/shopeasy
     username: postgres
@@ -13,6 +12,3 @@ spring:
 server:
   error:
     include-stacktrace: never
-springdoc:
-  swagger-ui:
-    path: /swagger-ui.html

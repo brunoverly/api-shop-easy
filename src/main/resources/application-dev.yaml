@@ -1,11 +1,10 @@
 spring:
-  profiles:
-    active: dev
   application:
     name: ShopEasy
   jpa:
     hibernate:
       ddl-auto: validate
+    show-sql: true
   datasource:
     url: jdbc:postgresql://localhost:5432/shopeasy
     username: postgres

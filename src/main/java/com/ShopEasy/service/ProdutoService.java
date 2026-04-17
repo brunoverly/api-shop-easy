@@ -109,18 +109,13 @@ public class ProdutoService {
 
     }
 
-
-
-
-
-
-
-
     private Produto checkarSeProdutoExisteAtivo(Long id) {
+        log.info("entrou no método para verificar se o produto existe no banco");
         Produto produto = produtoRepository.findByIdByAtivo(id);
         if(produto == null) {
             throw new EntityNotFoundException("Não foi localizado nenhum produto ativo com o ID informado");
         }
+        log.info("finalizou o método de verificar se o produto existe no banco com sucesso");
         return produto;
     }
 }

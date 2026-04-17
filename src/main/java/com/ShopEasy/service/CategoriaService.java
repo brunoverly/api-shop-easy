@@ -49,8 +49,10 @@ public class CategoriaService {
     }
 
     public Page<CategoriaResponseDto> findAll(Pageable pageable) {
+        log.info("entrando no método de listar todas as categorias");
         Page<Categoria> categorias =  categoriaRepositoy.findAll(pageable);
         Page<CategoriaResponseDto> categoriasDto = categorias.map(mapper::entityToDto);
+        log.info("método de listar todas categorias encerrado com sucesso");
         return categoriasDto;
     }
 
